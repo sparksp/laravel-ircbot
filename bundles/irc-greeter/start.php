@@ -18,6 +18,7 @@ $greet = array(
 	'jasonlewis',
 	'phillsparks',
 	'taylorotwell',
+	'daylerees'
 );
 
 // Listen to JOIN messages
