@@ -162,7 +162,7 @@ class Client {
 
 			else if ($message->command == 'INVITE')
 			{
-				if (in_array($message->sender->nick, Config::get('irc::client.allow')))
+				if (in_array(strtolower($message->sender->nick), Config::get('irc::client.allow')))
 				{
 					Message::join($message->params[1])->send($this->socket);
 				}
@@ -176,7 +176,7 @@ class Client {
 			else if ($message->command == 'PRIVMSG' and $message->params[0] == $this->sender->nick)
 			{
 				// TODO: Use host mask instead of "nick"
-				if (in_array($message->sender->nick, Config::get('irc::client.allow')))
+				if (in_array(strtolower($message->sender->nick), Config::get('irc::client.allow')))
 				{
 					Message::sendArray(
 						Command::make($message)->run(), $this->socket
