@@ -54,5 +54,5 @@ return array(
 	    ),
 	),
 	'irc-greeter' => array('auto' => true),
-	'irc-bundles' => array('auto' => true),
+	'feed-notifier' => array('auto' => true),
 );
