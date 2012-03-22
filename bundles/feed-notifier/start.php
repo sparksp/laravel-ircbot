@@ -14,7 +14,7 @@ use IRC\Message, IRC\Command;
 
 // feed reader to abstract out attribute names
 
-include __DIR__.'/vendor/simplepie.php';
+include __DIR__.'/vendor/SimplePie.compiled.php';
 
 
 function update_feeds()
