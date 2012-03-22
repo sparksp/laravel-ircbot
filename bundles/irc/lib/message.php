@@ -1708,7 +1708,7 @@ final class Message {
 	{
 		//    Command: QUIT
 		// Parameters: [ <Quit Message> ]
-		return static::make('QUIT', ":$message laravel.com");
+		return static::make('QUIT', ":$message (laravel.com)");
 	}
 
 	/**
