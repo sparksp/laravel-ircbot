@@ -48,6 +48,7 @@ function update_feeds()
 			// Last run timestamp
 			
 			$last = Cache::get($key);
+			$next = $last;
 
 			// Get the tokens from the message
 
@@ -70,7 +71,10 @@ function update_feeds()
 				// Compare with last timestamp.  If it's newer than last timestamp
 				// then let's process it
 
-				if ($item->get_date('U') > $last)
+				$time = $item->get_date('U');
+				$next = max($next, $time);
+
+				if ($time > $last)
 				{
 					$message = $config['message'];
 
@@ -87,20 +91,28 @@ function update_feeds()
 						$message = str_replace($s, $r, $message);
 					}
 
-					$messages[] = $message;
+					$messages[] = html_entity_decode($message);
 				}
 
 				if (count($messages) >= 3) break; // Flood protection
 			}
 
-			Cache::put($key, mktime(), $ttl);
+			Cache::put($key, $next, $ttl);
 
 			// Build the response messages
 
 			foreach($messages as $message)
 			{
-				$response[] = Message::privmsg($config['channel'], $message);
+				$response[] = Message::notice($config['channel'], $message);
 			}
+		}
+
+		// Return the response, do this in the for loop to prevent flooding.  Hopefully
+		// only one feed per ping will be handled.
+
+		if (count($response))
+		{
+			return $response;
 		}
 	}
 
