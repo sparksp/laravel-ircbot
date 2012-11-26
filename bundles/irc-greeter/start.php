@@ -177,7 +177,7 @@ $greetings = array(
 $languages = array_keys($greetings);
 $lowerlang = array_map('strtolower', $languages);
 
-$langreg = '/\b'.implode('|', array_map('preg_quote', $languages)).'\b/i';
+$langreg = '/\b(?:'.implode('|', array_map('preg_quote', $languages)).')\b/i';
 
 $greeter = function($message) use ($greetings)
 {
