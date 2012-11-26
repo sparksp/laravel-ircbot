@@ -86,7 +86,13 @@ function update_feeds()
 						{
 							$s[] = $tokens[0][$i];
 							$method = 'get_'.$tokens[1][$i];
-							$r[] = method_exists($item, $method) ? $item->$method() : '';
+							$v = method_exists($item, $method) ? $item->$method() : '';
+							$clean  = 'clean_'.$tokens[1][$i];
+							if (isset($config[$clean]))
+							{
+								$v = $config[$clean]($v);
+							}
+							$r[] = $v;
 						}
 						$message = str_replace($s, $r, $message);
 					}
