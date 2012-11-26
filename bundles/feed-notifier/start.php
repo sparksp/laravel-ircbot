@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Checks feeds periodically for new items and posts a notice to #laravel.
+ * Checks feeds periodically for new items and posts a message to #laravel.
  *
  * @package  Feed-Notifier
  * @category  Bundle
@@ -46,7 +46,7 @@ function update_feeds()
 			$messages = array();
 
 			// Last run timestamp
-			
+
 			$last = Cache::get($key);
 			$next = $last;
 
@@ -103,7 +103,7 @@ function update_feeds()
 
 			foreach($messages as $message)
 			{
-				$response[] = Message::notice($config['channel'], $message);
+				$response[] = Message::privmsg($config['channel'], strip_tags($message));
 			}
 		}
 
@@ -119,7 +119,7 @@ function update_feeds()
 	// Return the responses
 
 	if (count($response))
-	{		
+	{
 		return $response;
 	}
 }
