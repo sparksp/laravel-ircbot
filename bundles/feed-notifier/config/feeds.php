@@ -1,10 +1,9 @@
 <?php
-
 return array(
 
 	'laravel-forum' => array(
 		'message' => 'Forum Activity: (:title) (:link)',
-		'url' => 'http://forums.laravel.com/extern.php?action=feed&type=atom',
+		'url' => 'http://forums.laravel.com/extern.php?action=feed&type=rss',
 		'channel' => '#laravel',
 	),
 
