@@ -53,7 +53,7 @@ $greetings = array(
 	"Catalan" => "Bon dia", "català" => "Bon dia",
 	"Cebuano" => "Maayong buntag!", "Sinugboanon" => "Maayong buntag!", "Sugboanon" => "Maayong buntag!",
 	"Chichewa" => "Mwadzuka bwanji", "Chicheŵa" => "Mwadzuka bwanji",
-	"Chinese: Mandarin" => "Zao shang hao", "pŭtōnghùa" => "Zao shang hao", "gúoyŭ" => "Zao shang hao", "húayŭ" => "Zao shang hao",
+	"Chinese" => "Zao shang hao", "Mandarin" => "Zao shang hao", "pŭtōnghùa" => "Zao shang hao", "gúoyŭ" => "Zao shang hao", "húayŭ" => "Zao shang hao",
 	"Cornish" => "Myttin da", "Kernewek" => "Myttin da", "Kernowek" => "Myttin da", "Kernuak" => "Myttin da", "Curnoack" => "Myttin da",
 	"Corse" => "Bun ghjiornu",
 	"Creole" => "Bonjou", "Kreyòl ayisyen" => "Bonjou", // Haitian
@@ -90,7 +90,7 @@ $greetings = array(
 	"Icelandic" => "Gódan daginn", "Íslenska" => "Gódan daginn",
 	"Ilocano" => "Naimbag nga Aldaw", "ilokano" => "Naimbag nga Aldaw",
 	"Indonesian" => "Selamat pagi",
-	"Irish Gaelic" => "Dia duit ar maidin", "Gaeilge" => "Dia duit ar maidin",
+	"Irish" => "Dia duit ar maidin", "Gaelic" => "Dia duit ar maidin", "Gaeilge" => "Dia duit ar maidin",
 	"Italian" => "Buon giorno", "italiano" => "Buon giorno",
 	"Japanese" => "Ohayo gazaimasu", "nihongo" => "Ohayo gazaimasu",
 	"Kannada" => "Shubhodaya", "kannaḍa" => "Shubhodaya",
@@ -172,8 +172,9 @@ $greetings = array(
 	"Australian" => "G'day",
 	"Klingon" => "nuqneH", "tlhIngan Hol" => "nuqneH",
 	"Vulcan" => "Dif-tor heh smusma",
-	"Ferengi" => "Welcome to our home. Please place your thumbprint on the legal waivers and deposit your admission fee in the slot by the door. Remember, my house is my house. ",
-    "Gangnam Style" => "Eeeeeey sexy",
+	"Romulan" => "Brhon mnekha",
+	"Ferengi" => "Welcome to our home. Please place your thumbprint on the legal waivers and deposit your admission fee in the slot by the door. Remember, my house is my house,",
+	"Gangnam Style" => "Eeeeeey sexy",
 );
 
 $languages = array_keys($greetings);
@@ -214,21 +215,24 @@ $observer = function($message) use ($langreg, $languages, $lowerlang)
 
 	$langkey = "irc-language-$nick";
 
-	if (preg_match($langreg, $body, $m))
+	if (starts_with($body, "Rommie, I speak "))
 	{
-		$language = strtolower($m[0]);
-		$position = array_search($language, $lowerlang);
-		$language = $languages[$position];
-
-		$curlang = Cache::get($langkey);
-
-		if ($curlang !== $language)
+		if (preg_match($langreg, $body, $m))
 		{
-			Cache::put($langkey, $language, 3.15569e7);
-			return Message::notice($message->sender->nick, "I will now greet you in $language");
+			$language = strtolower($m[0]);
+			$position = array_search($language, $lowerlang);
+			$language = $languages[$position];
+
+			$curlang = Cache::get($langkey);
+
+			if ($curlang !== $language)
+			{
+				Cache::put($langkey, $language, 3.15569e7);
+				return Message::notice($message->sender->nick, "I will now greet you in $language");
+			}
 		}
 	}
-	else if ($body == 'Rommie, forget me')
+	else if (starts_with($body, "Rommie, forget me"))
 	{
 		Cache::forget($langkey);
 		return Message::notice($message->sender->nick, "I will stop greeting you now");
