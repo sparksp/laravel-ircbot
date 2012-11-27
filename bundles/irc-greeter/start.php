@@ -52,7 +52,7 @@ $greetings = array(
 	"Catalan" => "Bon dia",
 	"Cebuano" => "Maayong buntag!",
 	"Chichewa" => "Mwadzuka bwanji",
-	"Chinese: Mandarin" => "Zao shang hao",
+	"Chinese" => "Zao shang hao", "Mandarin" => "Zao shang hao",
 	"Cornish" => "Myttin da",
 	"Corse" => "Bun ghjiornu",
 	"Creole" => "Bonjou",
@@ -89,7 +89,7 @@ $greetings = array(
 	"Icelandic" => "Gódan daginn",
 	"Ilocano" => "Naimbag nga Aldaw",
 	"Indonesian" => "Selamat pagi",
-	"Irish Gaelic" => "Dia duit ar maidin",
+	"Irish" => "Dia duit ar maidin",
 	"Italian" => "Buon giorno",
 	"Japanese" => "Ohayo gozaimaz",
 	"Kannada" => "Shubhodaya",
@@ -171,7 +171,8 @@ $greetings = array(
 	"Australian" => "G'day",
 	"Klingon" => "nuqneH", "tlhIngan Hol" => "nuqneH",
 	"Vulcan" => "Dif-tor heh smusma",
-	"Ferengi" => "Welcome to our home. Please place your thumbprint on the legal waivers and deposit your admission fee in the slot by the door. Remember, my house is my house. ",
+	"Romulan" => "Brhon mnekha",
+	"Ferengi" => "Welcome to our home. Please place your thumbprint on the legal waivers and deposit your admission fee in the slot by the door. Remember, my house is my house,",
 );
 
 $languages = array_keys($greetings);
@@ -212,21 +213,24 @@ $observer = function($message) use ($langreg, $languages, $lowerlang)
 
 	$langkey = "irc-language-$nick";
 
-	if (preg_match($langreg, $body, $m))
+	if (starts_with($body, "Rommie, I speak "))
 	{
-		$language = strtolower($m[0]);
-		$position = array_search($language, $lowerlang);
-		$language = $languages[$position];
-
-		$curlang = Cache::get($langkey);
-
-		if ($curlang !== $language)
+		if (preg_match($langreg, $body, $m))
 		{
-			Cache::put($langkey, $language, 3.15569e7);
-			return Message::notice($message->sender->nick, "I will now greet you in $language");
+			$language = strtolower($m[0]);
+			$position = array_search($language, $lowerlang);
+			$language = $languages[$position];
+
+			$curlang = Cache::get($langkey);
+
+			if ($curlang !== $language)
+			{
+				Cache::put($langkey, $language, 3.15569e7);
+				return Message::notice($message->sender->nick, "I will now greet you in $language");
+			}
 		}
 	}
-	else if ($body == 'Rommie, forget me')
+	else if (starts_with($body, "Rommie, forget me"))
 	{
 		Cache::forget($langkey);
 		return Message::notice($message->sender->nick, "I will stop greeting you now");
