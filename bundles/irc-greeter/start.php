@@ -21,6 +21,7 @@ $greet = array(
 	'phillsparks'  => "Ferengi",
 	'shawnmccool'  => "Dutch",
 	'taylorotwell' => null,
+    'joellarson'   => "Gangnam Style",
 );
 
 foreach ($greet as $nick => $lang)
@@ -172,6 +173,7 @@ $greetings = array(
 	"Klingon" => "nuqneH", "tlhIngan Hol" => "nuqneH",
 	"Vulcan" => "Dif-tor heh smusma",
 	"Ferengi" => "Welcome to our home. Please place your thumbprint on the legal waivers and deposit your admission fee in the slot by the door. Remember, my house is my house. ",
+    "Gangnam Style" => "Eeeeeey sexy",
 );
 
 $languages = array_keys($greetings);
