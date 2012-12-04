@@ -12,6 +12,39 @@
 use IRC\Message;
 
 include __DIR__.'/libraries/curl.php';
+include __DIR__.'/libraries/simple_html_dom.php';
+
+
+/**
+ * Takes an href from a google search results page and determines whether it's good or bad
+ *
+ * @param string	$href
+ *
+ * @return string|false 	The string link if valid or false if invalid
+ */
+function processHref($href)
+{
+	//there is sometimes a strange prefix which must be removed
+	if (strpos($href, 'http://laravel.com/docs') === 9)
+	{
+		$href = substr($href, 9);
+	}
+
+	//split the string on the ampersand and get the first part
+	//so http://laravel.com/docs/eloquent&rct=j&q=.... would become http://laravel.com/docs/eloquent
+	$hrefParts = explode('&', $href);
+	$href = $hrefParts[0];
+
+	//if it is a valid laravel docs page
+	if (strpos($href, 'http://laravel.com/docs') !== false && $href !== 'http://laravel.com/docs')
+	{
+		return str_replace('%23', '#', $href);
+	}
+	else
+	{
+		return false;
+	}
+}
 
 // Rommie will watch out for people saying '!docs [search term]'
 $observer = function($message)
@@ -33,31 +66,51 @@ $observer = function($message)
 			$m1->set_url("http://google.com/search?q=laravel.com%2Fdocs+" . urlencode($search));
 
 			$r1 = $session->run($m1); // returns a curl_response object
-
-			$doc = new DomDocument();
-			@$doc->loadHTML($r1->data);
-
-			//get an array of all the li.g items
-			$finder = new DomXPath($doc);
-			$nodes = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' g ')]");
+			$html = str_get_html($r1->data);
 			$resultHref = false;
 
-			//traverse the dom for each returned node until a relevant result is found
-			if ($nodes)
+			//first find the result list items and iterate over them
+			if ($results = $html->find('#rso li.g'))
 			{
-				foreach ($nodes as $node)
+				foreach ($results as $result)
 				{
-					if ($node->childNodes)
+					//now check for the "Jump to" link which should be at "li.g span.st a" if it exists
+					if ($jumpToLink = $result->find('span.st a'))
 					{
-						$anchor = $node->firstChild->firstChild;
-						$hrefParts = explode('&rct', substr($anchor->getAttribute('href'), 9));
-						$href = $hrefParts[0];
-
-						if (strpos($href, 'http://laravel.com/docs') !== false && $href !== 'http://laravel.com/docs')
+						foreach ($jumpToLink as $link)
 						{
-							$resultHref = $href;
-							break;
+							//if the href is valid, break the loop
+							if ($resultHref = processHref($link->href))
+							{
+								break;
+							}
 						}
+
+					}
+
+					//if a link was found, break the loop
+					if ($resultHref)
+					{
+						break;
+					}
+
+					//otherwise check the main link
+					if ($mainLink = $result->find('h3.r a'))
+					{
+						foreach ($mainLink as $link)
+						{
+							//if the href is valid, break the loop
+							if ($resultHref = processHref($link->href))
+							{
+								break;
+							}
+						}
+					}
+
+					//if a link was found, break the search
+					if ($resultHref)
+					{
+						break;
 					}
 				}
 			}
