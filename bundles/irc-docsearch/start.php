@@ -11,6 +11,7 @@
 
 use IRC\Message;
 
+include __DIR__.'/libraries/curl.php';
 
 // Rommie will watch out for people saying '!docs [search term]'
 $observer = function($message)
@@ -52,7 +53,7 @@ $observer = function($message)
 						$hrefParts = explode('&rct', substr($anchor->getAttribute('href'), 9));
 						$href = $hrefParts[0];
 
-						if (strpos($href, 'http://laravel.com/docs') !== false)
+						if (strpos($href, 'http://laravel.com/docs') !== false && $href !== 'http://laravel.com/docs')
 						{
 							$resultHref = $href;
 							break;
