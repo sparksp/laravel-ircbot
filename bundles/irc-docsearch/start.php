@@ -118,7 +118,7 @@ $observer = function($message)
 			//if a link was found, post it back to #laravel
 			if ($resultHref)
 			{
-				$channel = $message->channel() ?: '#laravel';
+				$channel = $message->target() ?: '#laravel';
 				return Message::privmsg($channel, "Did someone ask for some docs? Here you go: " . $resultHref);
 			}
 
