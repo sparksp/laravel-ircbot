@@ -21,6 +21,7 @@ $greet = array(
 	'phillsparks'  => "Ferengi",
 	'shawnmccool'  => "Dutch",
 	'taylorotwell' => null,
+	'matiit'       => "Polish",
 );
 
 foreach ($greet as $nick => $lang)
@@ -126,7 +127,7 @@ $greetings = array(
 	"Owambo" => "Wa lalapo",
 	"Pashto" => "Sahar de pa Khair",
 	"Persian" => "Subbakhair",
-	"Polish" => "Dzien dobry",
+	"Polish" => "Witaj, jak sie masz",
 	"Polynesian" => "Ia ora na",
 	"Portuguese" => "Bom dia",
 	"Punjabi" => "Sat Shri Akal",
