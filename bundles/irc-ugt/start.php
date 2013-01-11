@@ -23,7 +23,7 @@ $observer = function($message)
 		//grab the nick to be highlighted
 		$nick = trim(substr($body, strlen($starter)));
 		//if the nick is a valid string,
-		if ($nick !== false && $nick !== '')
+		if ($nick !== '')
 		{
 			$nickToHighlight = $nick;
 		}
