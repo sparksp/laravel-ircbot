@@ -121,6 +121,12 @@ $observer = function($message)
 				$channel = $message->channel() ?: $message->sender->nick;
 				return Message::privmsg($channel, "Did someone ask for some docs? Here you go: " . $resultHref);
 			}
+			// give some feedback if the search lead to no results
+			else
+			{
+				$channel = $message->channel() ?: $message->sender->nick;
+				return Message::privmsg($channel, "Bummer! I couldn't find that doc for you. Sorry, I really tried...");
+			}
 
 
 		}
