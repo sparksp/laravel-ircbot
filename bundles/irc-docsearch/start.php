@@ -51,12 +51,28 @@ $observer = function($message)
 {
 	$nick = strtolower($message->sender->nick);
 	$body = end($message->params);
-	$starter = "!docs ";
+	$channel = $message->channel() ?: $message->sender->nick;
 
-	if (starts_with($body, $starter))
+	//Listen for name before starter
+	$starter = "!docs";
+	$starterPosition = strpos($body, $starter);
+
+	if ($starterPosition !== false)
 	{
 		//grab the search term
-		$search = trim(substr($body, strlen($starter)));
+		//$search = trim(substr($body, strlen($starter)));
+		if($starterPosition === 0) {
+			$tell = null;
+			$search = trim(substr($body, strlen($starter)));
+		}
+
+		if($starterPosition > 0) {
+			$bodyArr = explode(' ', $body);
+			$tell = $bodyArr[0];
+
+			$search = trim(substr($body, strlen($starter) + $starterPosition));
+
+		}
 
 		//if the search term is a valid string,
 		if ($search !== false && $search !== '')
@@ -118,11 +134,19 @@ $observer = function($message)
 			//if a link was found, post it back to #laravel
 			if ($resultHref)
 			{
-				$channel = $message->channel() ?: $message->sender->nick;
-				return Message::privmsg($channel, "Did someone ask for some docs? Here you go: " . $resultHref);
+				
+				if($tell === null) {
+					return Message::privmsg($channel, "Did someone ask for some docs? Here you go: " . $resultHref);
+				} else {
+					return Message::privmsg($channel, $tell . ": " . $message->sender->nick . " wanted you to see " . $resultHref);
+				}
+			} else {
+				return Message::privmsg($channel, $message->sender->nick . ": I couldn't find what you were looking for.");
 			}
 
 
+		} else {
+			return Message::privmsg($channel, $message->sender->nick . ": What docs are you looking for?");
 		}
 	}
 };
