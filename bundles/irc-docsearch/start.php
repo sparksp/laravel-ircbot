@@ -36,7 +36,8 @@ function processHref($href)
 	$href = $hrefParts[0];
 
 	//if it is a valid laravel docs page
-	if (strpos($href, 'http://laravel.com/docs') !== false && $href !== 'http://laravel.com/docs')
+	if ((strpos($href, 'http://laravel.com/docs') !== false && $href !== 'http://laravel.com/docs') ||
+		(strpos($href, 'http://four.laravel.com/docs') !== false && $href !== 'http://four.laravel.com/docs'))
 	{
 		return str_replace('%23', '#', $href);
 	}
@@ -52,34 +53,55 @@ $observer = function($message)
 	$nick = strtolower($message->sender->nick);
 	$body = end($message->params);
 	$channel = $message->channel() ?: $message->sender->nick;
+	$version = null;
+	$urlForFour = null;
+	$tell = null;
 
-	//Listen for name before starter
-	$starter = "!docs";
-	$starterPosition = strpos($body, $starter);
+	//Listen for starter
+	$starter3 = "!docs";
+	$starter4 = "!4docs";
 
-	if ($starterPosition !== false)
+	$starterPosition3 = strpos($body, $starter3);
+	$starterPosition4 = strpos($body, $starter4);
+
+
+	if ($starterPosition3 !== false || $starterPosition4 !== false)
 	{
-		//grab the search term
-		//$search = trim(substr($body, strlen($starter)));
-		if($starterPosition === 0) {
-			$tell = null;
-			$search = trim(substr($body, strlen($starter)));
-		}
 
+		// set the version of laravel docs we want
+		if($starterPosition4 !== false ) {
+			$version = 4;
+			$starterLength = strlen($starter4);
+			$starterPosition = $starterPosition4;
+			$urlForFour = 'four.';
+		} else {
+			$version = 3;
+			$starterLength = strlen($starter3);
+			$starterPosition = $starterPosition3;
+		}
+	
+
+		// lets see if we need to 'tell' someone the response
 		if($starterPosition > 0) {
 			$bodyArr = explode(' ', $body);
 			$tell = $bodyArr[0];
-
-			$search = trim(substr($body, strlen($starter) + $starterPosition));
-
 		}
+
+		$search = trim(substr($body, ($starterLength + $starterPosition)));
+
+
 
 		//if the search term is a valid string,
 		if ($search !== false && $search !== '')
 		{
 			$session = new curl();
 			$m1 = new curl_request();
-			$m1->set_url("http://google.com/search?q=laravel.com%2Fdocs+" . urlencode($search));
+			
+
+				
+			
+			
+			$m1->set_url("http://google.com/search?q=".$urlForFour."laravel.com%2Fdocs+" . urlencode($search));
 
 			$r1 = $session->run($m1); // returns a curl_response object
 			$html = str_get_html($r1->data);
