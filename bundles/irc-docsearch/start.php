@@ -52,6 +52,7 @@ $observer = function($message)
 {
 	$nick = strtolower($message->sender->nick);
 	$body = end($message->params);
+	$bodyArray = explode(' ', $body);
 	$channel = $message->channel() ?: $message->sender->nick;
 	$version = null;
 	$urlForFour = null;
@@ -61,23 +62,27 @@ $observer = function($message)
 	$starter3 = "!docs";
 	$starter4 = "!4docs";
 
-	$starterPosition3 = strpos($body, $starter3);
-	$starterPosition4 = strpos($body, $starter4);
+	$starterPosition3Start = strpos($body, $starter3);
+	$starterPosition4Start = strpos($body, $starter4);
+
+	$starterPosition3Key = array_search($starter3, $bodyArray);
+	$starterPosition4Key = array_search($starter4, $bodyArray);
 
 
-	if ($starterPosition3 !== false || $starterPosition4 !== false)
+	if ( ( $starterPosition3Key <= '1' && $starterPosition3Start !== false ) || 
+	 	 ( $starterPosition4Key <= '1' && $starterPosition4Start !== false ) )
 	{
 
 		// set the version of laravel docs we want
-		if($starterPosition4 !== false ) {
+		if($starterPosition4Start !== false ) {
 			$version = 4;
 			$starterLength = strlen($starter4);
-			$starterPosition = $starterPosition4;
+			$starterPosition = $starterPosition4Start;
 			$urlForFour = 'four.';
 		} else {
 			$version = 3;
 			$starterLength = strlen($starter3);
-			$starterPosition = $starterPosition3;
+			$starterPosition = $starterPosition3Start;
 		}
 	
 
