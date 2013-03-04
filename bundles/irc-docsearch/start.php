@@ -170,6 +170,12 @@ $observer = function($message)
 			} else {
 				return Message::privmsg($channel, $message->sender->nick . ": I couldn't find what you were looking for.");
 			}
+			// give some feedback if the search lead to no results
+			else
+			{
+				$channel = $message->channel() ?: $message->sender->nick;
+				return Message::privmsg($channel, "Bummer! I couldn't find that doc for you. Sorry, I really tried...");
+			}
 
 
 		} else {
