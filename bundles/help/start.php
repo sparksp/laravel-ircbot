@@ -16,6 +16,6 @@ IRC\Message::listen('privmsg', function($message)
 
         $channel = $message->channel() ?: '#laravel';
 
-        return Message::privmsg($channel, $help_text);
+        return IRC\Message::privmsg($channel, $help_text);
     }
 });
