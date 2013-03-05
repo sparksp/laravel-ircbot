@@ -50,7 +50,7 @@ class Client {
 				->send($this->socket);
 		}
 
-		Message::notice('PhillSparks', "I am online")->send($this->socket);
+		Message::notice('lamarus_', "I am online")->send($this->socket);
 
 		$this->main();
 
