@@ -165,7 +165,7 @@ $observer = function($message)
 				if($tell === null) {
 					return Message::privmsg($channel, "Did someone ask for some docs? Here you go: " . $resultHref);
 				} else {
-					return Message::privmsg($channel, $tell . ": " . $message->sender->nick . " wanted you to see " . $resultHref);
+					return Message::privmsg($channel, $tell . " " . $message->sender->nick . " wanted you to see " . $resultHref);
 				}
 			} else {
 				return Message::privmsg($channel, $message->sender->nick . ": I couldn't find what you were looking for.");

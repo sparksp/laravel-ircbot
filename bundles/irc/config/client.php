@@ -18,19 +18,19 @@ return array(
 	 * The IRC user's username
 	 * @var string
 	 */
-	'user' => 'miniroomie',
+	'user' => 'minirommie',
 
 	/**
 	 * The IRC user's nick
 	 * @var string
 	 */
-	'nick' => 'miniroomie',
+	'nick' => 'minirommie',
 
 	/**
 	 * The IRC user's name
 	 * @var string
 	 */
-	'name' => 'Roomies Child',
+	'name' => 'Rommies Child',
 
 	/**
 	 * The password of the IRC Server
@@ -42,7 +42,7 @@ return array(
 	 * @var array
 	 */
 	'allow' => array(
-		'lamarus_'
+		'lamarus_','lamarus'
 	),
 
 	/**
