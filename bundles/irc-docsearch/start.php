@@ -106,7 +106,7 @@ $observer = function($message)
 				
 			
 			
-			$m1->set_url("http://google.com/search?q=".$urlForFour."laravel.com%2Fdocs+" . urlencode($search));
+			$m1->set_url("http://google.com/search?q=site:".$urlForFour."laravel.com%2Fdocs+" . urlencode($search));
 
 			$r1 = $session->run($m1); // returns a curl_response object
 			$html = str_get_html($r1->data);
