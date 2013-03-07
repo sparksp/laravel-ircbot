@@ -6,7 +6,7 @@ return array(
 	 * The hostname of the IRC Server
 	 * @var string
 	 */
-	'server' => '',
+	'server' => 'irc.freenode.net',
 
 	/**
 	 * The port number of the IRC Server
@@ -18,19 +18,19 @@ return array(
 	 * The IRC user's username
 	 * @var string
 	 */
-	'user' => '',
+	'user' => 'minirommie',
 
 	/**
 	 * The IRC user's nick
 	 * @var string
 	 */
-	'nick' => '',
+	'nick' => 'minirommie',
 
 	/**
 	 * The IRC user's name
 	 * @var string
 	 */
-	'name' => 'Laravel Bot',
+	'name' => 'Rommies Child',
 
 	/**
 	 * The password of the IRC Server
@@ -42,24 +42,24 @@ return array(
 	 * @var array
 	 */
 	'allow' => array(
-		''
+		'lamarus_','lamarus'
 	),
 
 	/**
 	 * Settings for NickServ
 	 * @var array
 	 */
-	// 'nickserv' => array(
-	// 	'nick'     => '',
-	// 	'password' => '',
-	// ),
+	'nickserv' => array(
+		'nick'     => 'miniroomie',
+		'password' => 'laravelminiroomie',
+	),
 
 	/**
 	 * A list of channels to join once connected.
 	 * @var array
 	 */
 	'join' => array(
-
+		'#laravel-bot-test'
 	),
 
 	/**

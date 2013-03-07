@@ -106,7 +106,7 @@ $observer = function($message)
 				
 			
 			
-			$m1->set_url("http://google.com/search?q=".$urlForFour."laravel.com%2Fdocs+" . urlencode($search));
+			$m1->set_url("http://google.com/search?q=site:".$urlForFour."laravel.com%2Fdocs+" . urlencode($search));
 
 			$r1 = $session->run($m1); // returns a curl_response object
 			$html = str_get_html($r1->data);
@@ -165,7 +165,7 @@ $observer = function($message)
 				if($tell === null) {
 					return Message::privmsg($channel, "Did someone ask for some docs? Here you go: " . $resultHref);
 				} else {
-					return Message::privmsg($channel, $tell . ": " . $message->sender->nick . " wanted you to see " . $resultHref);
+					return Message::privmsg($channel, $tell . " " . $message->sender->nick . " wanted you to see " . $resultHref);
 				}
 			} else {
 				return Message::privmsg($channel, $message->sender->nick . ": I couldn't find what you were looking for.");
