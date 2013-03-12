@@ -56,5 +56,6 @@ return array(
 	'irc-greeter' => array('auto' => true),
 	'feed-notifier' => array('auto' => true),
 	'irc-docsearch' => array('auto' => true),
-	'irc-general' => array('auto' => true)
+	'irc-general' => array('auto' => true),
+	'irc-qweb' => array('auto'=>true),
 );
