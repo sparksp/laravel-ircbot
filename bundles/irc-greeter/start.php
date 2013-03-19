@@ -21,6 +21,7 @@ $greet = array(
 	'phillsparks'  => "Ferengi",
 	'shawnmccool'  => "Dutch",
 	'taylorotwell' => null,
+	'bryantebeek'  => "Dutch"
 );
 
 foreach ($greet as $nick => $lang)
