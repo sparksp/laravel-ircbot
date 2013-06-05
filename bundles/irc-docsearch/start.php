@@ -132,7 +132,7 @@ $observer = function($message)
 					return Message::privmsg($channel, ($channel == $nick ? "" : "$nick: "). "Here you go $resultHref");
 				} else {
 					if ($channel == $nick) $channel = $tell;
-					return Message::privmsg($channel, ($channel == $tell ? "" : "$tell: "). "$nick wanted you to see $resultHref");
+					return Message::privmsg($channel, ($channel == $tell ? "" : str_finish($tell, ": ")). "$nick wanted you to see $resultHref");
 				}
 			} else {
 				return Message::privmsg($channel, "$nick: I couldn't find what you were looking for");
