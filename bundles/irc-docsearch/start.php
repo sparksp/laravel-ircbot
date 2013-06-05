@@ -56,7 +56,7 @@ $observer = function($message)
 	$body = end($message->params);
 	$channel = $message->channel() ?: $nick;
 
-	if (preg_match('/^(?P<tell>.*)[:\s]*!(?P<version>\d*)docs\b(?P<search>.*)$/', $body, $m))
+	if (preg_match('/^(?P<tell>.*)[:\s]*!(?P<version>\d*|api)docs\b(?P<search>.*)$/', $body, $m))
 	{
 		$tell = $m['tell'];
 		$version = $m['version'];
@@ -64,6 +64,7 @@ $observer = function($message)
 
 		$site = 'laravel.com%2Fdocs';
 
+		if ($version == "api") $site = "laravel.com%2Fapi";
 		if ($version == "3") $site = "three.$site";
 		if ($version == "4") $site = "four.$site";
 
