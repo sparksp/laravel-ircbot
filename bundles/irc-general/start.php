@@ -15,25 +15,22 @@ use IRC\Message;
 
 function triggerOn($message, $triggersArray) {
 
+    $nick = strtolower($message->sender->nick);
+    $body = end($message->params);
+    $channel = $message->channel() ?: $message->sender->nick;
+
     foreach($triggersArray as $trigger => $returnMessage) {
-        $nick = strtolower($message->sender->nick);
-        $body = end($message->params);
-        $channel = $message->channel() ?: $message->sender->nick;
 
-        $starterPosition = strpos($body, $trigger);
+        $match = '/^(.*)[:\s]*';
+        if (preg_match('/^\b./', $trigger)) {
+            $match .= '\b';
+        }
+        $match .= $trigger.'\b/';
 
-        if ($starterPosition !== false && $returnMessage != '')
-        {
-            if($starterPosition === 0) {
-                $tell = null;
-            }
+        if (preg_match($match, $body, $m)) {
+            $tell = $m[1];
 
-            if($starterPosition > 0) {
-                $bodyArr = explode(' ', $body);
-                $tell = $bodyArr[0];
-            }
-
-            if($tell === null) {
+            if(empty($tell)) {
                 return Message::privmsg($channel, $returnMessage);
             } else {
                 return Message::privmsg($channel, str_finish($tell, ": ") . $returnMessage);
