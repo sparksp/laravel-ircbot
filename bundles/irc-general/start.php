@@ -36,7 +36,7 @@ function triggerOn($message, $triggersArray) {
             if($tell === null) {
                 return Message::privmsg($channel, $returnMessage);
             } else {
-                return Message::privmsg($channel, $tell . ": " . $returnMessage);
+                return Message::privmsg($channel, str_finish($tell, ": ") . $returnMessage);
             }
         }
     }
