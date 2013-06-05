@@ -11,4 +11,6 @@ return array(
     '!l4install'    => "Everything you need to know about installing and updating Laravel 4: http://niallobrien.me/2013/03/installing-and-updating-laravel-4/",
     '!nick'         => "Hello! You're currently using a nick that's difficult to distinguish. Please type in \"/nick your_name\" so we can easily identify you",
     '!welcome'      => "Hello, I'm Rommie, the Laravel IRC Bot!  Welcome to Laravel :).  If you have any questions, type !help to see how to best ask for assistance.  If you need to paste code, check !paste for more info.  Thanks!",
+    '!docscontrib'  => "Want to contribute to the documentation? Awesome! Fork and submit a pull request at http://github.com/laravel/docs",
+    '!wheresrommie' => "Hello :) Phill Sparks created me to help you! I can be found at https://github.com/sparksp/laravel-ircbot/tree/develop",
 );
