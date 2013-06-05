@@ -15,7 +15,7 @@ set :deploy_to,       "/home/phills/rommie"
 set :deploy_via,      :remote_cache
 set :keep_releases,   3
 set :use_sudo,        false
-set :shared_children, %w( storage/cache storage/database storage/logs storage/logs/irc storage/sessions storage/views storage/work config/irc )
+set :shared_children, %w( storage/cache storage/database storage/logs storage/sessions storage/views storage/work config/irc )
 
 set :user,  'phills'
 set :group, 'phills'
