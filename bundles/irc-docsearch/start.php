@@ -67,6 +67,8 @@ $observer = function($message)
 		if ($version == "api") $site = "laravel.com%2Fapi";
 		if ($version == "3") $site = "three.$site";
 		if ($version == "4") $site = "four.$site";
+		// hack in -site to workaround seo issues
+		if ($site == 'laravel.com%2Fdocs') $site = $site . '+-site:four.laravel.com';
 
 		//if the search term is a valid string,
 		if (!empty($search))
