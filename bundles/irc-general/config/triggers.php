@@ -19,4 +19,5 @@ return array(
     '!relsched'     => "Here is our release schedule: http://wiki.laravel.io/Laravel_4#Release_Schedule",
     '!massassign'   => "Getting a MassAssignmentException? Find out how to protect your input at: http://wiki.laravel.io/FAQ_(Laravel_4)#MassAssignmentException",
     '!tableflip'    => "(╯°□°)╯︵ ┻━┻",
+    '!lj'           => "Leeeeeeeeeeerooooy Jenkinnnnns!",
 );
