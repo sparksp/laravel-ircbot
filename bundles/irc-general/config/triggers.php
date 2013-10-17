@@ -19,5 +19,5 @@ return array(
     '!relsched'     => "Here is our release schedule: http://wiki.laravel.io/Laravel_4#Release_Schedule",
     '!massassign'   => "Getting a MassAssignmentException? Find out how to protect your input at: http://wiki.laravel.io/FAQ_(Laravel_4)#MassAssignmentException",
     '!tableflip'    => "(╯°□°)╯︵ ┻━┻",
-    '!xy'           => "Woah, slow down for a bit. Are you sure you need to jump through that particular hoop to achieve your goal? We suspect you might not, so why don't you back up a bit and tell us about the overall objective... for more information about presenting your problem see !help. Thanks! Also see http://mywiki.wooledge.org/XyProblem"
+    '!xy'           => "It's difficult to discuss a solution without first understanding the problem. Please, explain the problem itself and not the solution that you have in mind. For more info on presenting your problem see !help. Thanks! Also see http://mywiki.wooledge.org/XyProblem"
 );
