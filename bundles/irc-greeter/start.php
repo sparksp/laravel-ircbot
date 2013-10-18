@@ -156,6 +156,7 @@ $greetings = array(
 	"Tibetan" => "Nyado delek",
 	"Tonga" => "Mwabuka buti",
 	"Tswana" => "Dumela",
+	"Twi" => "Akwaaba",
 	"Turkish" => "Günaydin",
 	"Turkmen" => "Ertiringiz haiyirli bolsun",
 	"Ukrainian" => "Dobri ranok",
