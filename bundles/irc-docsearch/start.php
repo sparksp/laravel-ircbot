@@ -83,7 +83,7 @@ $observer = function($message)
 			$resultHref = false;
 
 			//first find the result list items and iterate over them
-			if ($results = $html->find('#rso li.g'))
+			if ($html && ($results = $html->find('#rso li.g')))
 			{
 				foreach ($results as $result)
 				{
