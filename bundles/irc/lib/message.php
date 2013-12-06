@@ -1576,7 +1576,13 @@ final class Message {
 	 */
 	public function __get($name)
 	{
-		return $this->$name;
+		switch ($name)
+		{
+			case "body":
+				return end($this->params);
+			default:
+				return $this->$name;
+		}
 	}
 
 	/**

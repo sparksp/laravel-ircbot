@@ -45,9 +45,9 @@ class Command {
 		// Keep the message sender handy
 		$this->sender  = $message->sender;
 		// Split the command name and params out
-		list($this->name, $params) = explode(' ', end($message->params), 2);
+		list($this->name, $params) = explode(' ', $message->body, 2) + array("", "");
 		
-		if ($params[0] == ':')
+		if (substr($params, 0, 1) == ':')
 		{
 			$params = array(substr($params, 1));
 		}

@@ -212,7 +212,7 @@ Message::listen('join', $greeter);
 $observer = function($message) use ($langreg, $languages, $lowerlang)
 {
 	$nick = strtolower($message->sender->nick);
-	$body = end($message->params);
+	$body = $message->body;
 
 	$langkey = "irc-language-$nick";
 

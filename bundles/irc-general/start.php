@@ -16,7 +16,7 @@ use IRC\Message;
 function triggerOn($message, $triggersArray) {
 
     $nick = strtolower($message->sender->nick);
-    $body = end($message->params);
+    $body = $message->body;
     $channel = $message->channel() ?: $message->sender->nick;
 
     foreach($triggersArray as $trigger => $returnMessage) {

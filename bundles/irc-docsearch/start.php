@@ -53,7 +53,7 @@ function processHref($href)
 $observer = function($message)
 {
 	$nick = $message->sender->nick;
-	$body = end($message->params);
+	$body = $message->body;
 	$channel = $message->channel() ?: $nick;
 
 	if (preg_match('/^(?P<tell>.*)[:\s]*!(?P<version>\d*|api)docs\b(?P<search>.*)$/', $body, $m))
