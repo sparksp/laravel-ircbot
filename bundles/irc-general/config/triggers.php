@@ -22,5 +22,6 @@ return array(
     '!xy'           => "It's difficult to discuss a solution without first understanding the problem. Please, explain the problem itself and not the solution that you have in mind. For more info on presenting your problem see !help. Thanks! Also see http://mywiki.wooledge.org/XyProblem",
     '!41update'     => "If you're updating from 4.0.x to Laravel 4.1, make sure you follow the steps in https://github.com/laravel/laravel/blob/develop/upgrade.md to avoid common issues. This is due to necessary changes to the Laravel core to make things more awesome.",
     '!helpme'       => "Before asking for help, use http://help.laravel.io to provide us the information we need to help you - Laravel version, expected/actual behavior, and all relevant code. Paste the link here when done. Thanks!",
+    '!isaidhelp'    => "I said !help to give you instructions on how to get help here. If you show me all your code I will most likely just see the issue and tell you the fix. Don't show me small snippets of where you think the issue is, if you knew where it was it wouldn't be an issue. Help me help you.",
 
 );
