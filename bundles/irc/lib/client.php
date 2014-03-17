@@ -112,6 +112,7 @@ class Client {
 	 */
 	protected function read()
 	{
+		$message = null;
 		do
 		{
 			if ($message = Message::parse($this->socket->read()))
