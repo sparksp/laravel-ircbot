@@ -8,11 +8,11 @@ return array(
 	// 	'channel' => '#laravel',
 	// ),
 
-	'laravel-google' => array(
-		'message' => 'Google Alert: (:title) (:link)',
-		'url' => 'http://www.google.com/alerts/feeds/15062750671952302504/1492468193374197150',
-		'channel' => '#laravel',
-	),
+	// 'laravel-google' => array(
+	// 	'message' => 'Google Alert: (:title) (:link)',
+	// 	'url' => 'http://www.google.com/alerts/feeds/15062750671952302504/1492468193374197150',
+	// 	'channel' => '#laravel',
+	// ),
 
 	'laravel-stackoverflow' => array(
 		'message' => 'Stack Overflow: (:title) (:link)',
