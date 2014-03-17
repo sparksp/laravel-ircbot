@@ -57,4 +57,5 @@ return array(
 	'feed-notifier' => array('auto' => true),
 	'irc-general' => array('auto' => true),
 	'irc-qweb' => array('auto'=>true),
+	'irc-tables' => array('auto'=>true),
 );
