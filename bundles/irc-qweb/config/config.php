@@ -5,7 +5,7 @@ return array(
 	/**
 	 * @var string Regex for matching usernames
 	 */
-	'regex'     => '/^(guest|qwebirc)/',
+	'regex'     => '/^(guest|laravelnewbie|qwebirc)/',
 
 	 /**
 	  * @var string Message to send to user when they join.  Placeholders are {{nick}} and {{channel}}.
