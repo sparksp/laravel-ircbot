@@ -4,8 +4,6 @@ use IRC\Message;
 
 $flipper = function($message)
   {
-    echo "flipper\n";
-    
     $nick = $message->sender->nick;
     $body = $message->body;
     $channel = $message->channel() ?: '#laravel';
